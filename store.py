@@ -28,6 +28,7 @@ class Store:
     def order(self, shopping_list):
         total = 0
         for product, quantity in shopping_list:
-            products.Product.buy(product, quantity)
-            total += product.price * quantity
+            cost = product.buy(quantity)
+            total += cost
         return total
+
