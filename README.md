@@ -15,11 +15,9 @@ This is a Python program for managing a fictional online store, Best Buy. It all
 
 2. Run the program:
 
-bash
-Copy code
-python main.py
-Follow the on-screen prompts to interact with the Best Buy store.
-Product Types
+- python main.py
+- Follow the on-screen prompts to interact with the Best Buy store.
+- Product Types
 
 Regular Products: Products with a name, price, quantity, and optional promotions.
 Non-Stocked Products: Products with a fixed price and zero quantity, used for items that don't require stock tracking.
