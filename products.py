@@ -5,16 +5,13 @@ class Product:
     def __init__(self, name, price, quantity, promotion = None):
         if not name:
             raise ValueError("Please enter a name for the product")
-        else:
-            self.name = name
+        self.name = name
         if price < 0:
             raise ValueError("Price cannot be negative")
-        else:
-            self.price = price
+        self.price = price
         if quantity < 0:
             raise ValueError("Quantity cannot be negative")
-        else:
-            self.quantity = quantity
+        self.quantity = quantity
         self.promotion = promotion
 
     active = True
@@ -45,24 +42,29 @@ class Product:
     def show(self):
         if self.promotion:
             return f"{self.name}, Price: {self.price}, Quantity: {self.quantity},Promotion: {self.promotion.name}"
-        else:
-            return f"{self.name}, Price: {self.price}, Quantity: {self.quantity},Promotion: None"
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity},Promotion: None"
 
     def buy(self, quantity):
-        if self.active:
-            if quantity <= 0:
-                raise ValueError("Insert a valid quantity to purchase")
-            elif quantity > self.quantity:
-                raise ValueError("Insufficient quantity")
-            else:
-                if self.promotion is None:
-                    self.quantity -= quantity
-                    return quantity * self.price
-                else:
-                    self.quantity -= quantity
-                    return self.promotion.apply_promotion(self, quantity)
-        else:
+        if not self.active:
             print("Inactive product")
+            return
+        if quantity <= 0:
+            raise ValueError("Insert a valid quantity to purchase")
+        if quantity > self.quantity and self.__class__ == NonStockedProduct.__class__:
+            raise ValueError("Insufficient quantity")
+        return self.promotion_handler(quantity)
+
+    def promotion_handler(self, quantity):
+        try:
+            if self.promotion is None:
+                self.quantity -= quantity
+                return quantity * self.price
+            self.quantity -= quantity
+            return self.promotion.apply_promotion(self, quantity)
+        except ValueError as e:
+            print(f"Promotion wasn't applied: {e}")
+            self.promotion = None
+            return self.buy(quantity)
 
 
 class NonStockedProduct(Product):
@@ -86,8 +88,7 @@ class LimitedProduct(Product):
     def buy(self, quantity):
         if quantity <= self.max_purchase:
             return super().buy(quantity)
-        else:
-            raise ValueError(f"You can only purchase {self.max_purchase} of this product")
+        raise ValueError(f"You can only purchase {self.max_purchase} of this product")
 
     def show(self):
         return f"{self.name}, Price: {self.price}, Max purchase: {self.max_purchase}"

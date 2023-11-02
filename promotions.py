@@ -33,8 +33,7 @@ class SecondHalfPrice(Promotion):
         elif quantity > 1:
             discount = (quantity - 1) / 2 * product.price / 2
             return product.price * quantity - discount
-        else:
-            raise ValueError("You must buy at least 2 products to get this promotion")
+        raise ValueError("You must buy at least 2 products to get this promotion")
 
 
 class ThirdOneFree(Promotion):
@@ -45,5 +44,4 @@ class ThirdOneFree(Promotion):
         if quantity >= 3:
             discounted_quantity = quantity - (quantity // 3)
             return discounted_quantity * product.price
-        else:
-            raise ValueError("You must buy at least 3 products to get this promotion")
+        raise ValueError("You must buy at least 3 products to get this promotion")
