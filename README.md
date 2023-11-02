@@ -13,10 +13,7 @@ This is a Python program for managing a fictional online store, Best Buy. It all
 
 1. Clone this repository to your local machine.
 
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-Run the program:
+2. Run the program:
 bash
 Copy code
 python main.py
