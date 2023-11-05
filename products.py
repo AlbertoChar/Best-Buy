@@ -55,11 +55,11 @@ class Product:
         return self.promotion_handler(quantity)
 
     def promotion_handler(self, quantity):
-        try:
-            if self.promotion is None:
-                self.quantity -= quantity
-                return quantity * self.price
+        if self.promotion is None:
             self.quantity -= quantity
+            return quantity * self.price
+        self.quantity -= quantity
+        try:
             return self.promotion.apply_promotion(self, quantity)
         except ValueError as e:
             print(f"Promotion wasn't applied: {e}")
