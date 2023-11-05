@@ -13,15 +13,11 @@ This is a Python program for managing a fictional online store, Best Buy. It all
 
 1. Clone this repository to your local machine.
 
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-Run the program:
-bash
-Copy code
-python main.py
-Follow the on-screen prompts to interact with the Best Buy store.
-Product Types
+2. Run the program:
+
+- python main.py
+- Follow the on-screen prompts to interact with the Best Buy store.
+- Product Types
 
 Regular Products: Products with a name, price, quantity, and optional promotions.
 Non-Stocked Products: Products with a fixed price and zero quantity, used for items that don't require stock tracking.
